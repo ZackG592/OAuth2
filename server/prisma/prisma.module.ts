@@ -1,15 +1,10 @@
-import { Global, Injectable } from "@nestjs/common";
-
-
+// prisma.module.ts
+import { Global, Module } from "@nestjs/common";
+import { PrismaService } from "./prisma.service";
 
 @Global()
-@Injectable()
-export class PrismaModule {
-  static forRoot() {
-    return {
-      module: PrismaModule,
-      providers: [],
-      exports: [],
-    };
-  }
-}
+@Module({
+  providers: [PrismaService],
+  exports: [PrismaService],
+})
+export class PrismaModule {}
