@@ -7,7 +7,7 @@ services:
         - POSTGRES_USER=${POSTGRES_USER}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         - POSTGRES_DB=${POSTGRES_DB}
-      ports:
+      ports: 
         - "5432:5432"
 
   server:
@@ -21,13 +21,27 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+
       - CLIENT_ID=${CLIENT_ID}
       - CLIENT_SECRECT=${CLIENT_SECRECT}
       - CALLBACK_URL=${CALLBACK_URL}
+      
       - JWT_EXPIERS_IN=${JWT_EXPIERS_IN}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
 
       - IS_SECURE_COOKIE=FALSE
+
+      - MAIN_CLIENT=${MAIN_CLIENT}
     volumes:
       - ./server:/app
+      - /app/node_modules
+  
+  client:
+    build: './client'
+    # depends_on:
+    #   - server
+    ports:
+     - "3000:3000"
+    volumes:
+      - './client:/app'
       - /app/node_modules
