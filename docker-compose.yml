@@ -9,8 +9,7 @@ services:
         - POSTGRES_DB=${POSTGRES_DB}
       ports:
         - "5432:5432"
-      volumes:
-        - postgres_data:/var/lib/postgresql/data
+
   server:
     build: './server'
     depends_on:
@@ -22,8 +21,13 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRECT=${CLIENT_SECRECT}
+      - CALLBACK_URL=${CALLBACK_URL}
+      - JWT_EXPIERS_IN=${JWT_EXPIERS_IN}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+
+      - IS_SECURE_COOKIE=FALSE
     volumes:
       - ./server:/app
       - /app/node_modules
-volumes:
-  postgres_data:
