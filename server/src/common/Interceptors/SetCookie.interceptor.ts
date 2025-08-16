@@ -26,7 +26,10 @@ export class SetCookieInterceptor implements NestInterceptor {
                 })
 
                const dataToReturn = data.data
-
+               console.log(data?.redirect)
+               if(data?.redirect){
+                    return response.redirect(data.redirect)
+                }
                return dataToReturn
             })
         )

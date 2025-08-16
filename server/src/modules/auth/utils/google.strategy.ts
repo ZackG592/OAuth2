@@ -16,10 +16,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
         })
     }
     
-    async validate(profile: Profile): Promise<SafeUserData | false> {
-
+    async validate(accessToken:string, refreshToken:string, profile: Profile): Promise<SafeUserData | false> {
         const email = profile._json.email
-
         if(!email){
             return false
         }

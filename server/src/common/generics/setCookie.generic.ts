@@ -1,4 +1,5 @@
 export type SetCookie<T> = {
-    cookieName:string,
-    data:T
+    cookieName:string;
+    redirect?:string;
+    data:T;
 }
