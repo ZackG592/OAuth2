@@ -31,7 +31,7 @@ export class AuthController{
     @UseGuards(GoogleAuthGuard)
     @UseInterceptors(SetCookieInterceptor)
     async handleRedirect(@Req() req: RequestWithSafeUserData):Promise<SetCookie<SafeUserData>>{
-        return {cookieName:COOKIE_CONSTANTS.ACCESS_TOKEN, data: req.user}
+        return {cookieName:COOKIE_CONSTANTS.ACCESS_TOKEN, data: req.user, redirect:process.env.MAIN_CLIENT}
     }   
 
     @Post('native/login')
